@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+
+import sys
+import os
+import struct
+import argparse
+
+# Add the project directory to the python path
+sys.path.append(os.path.join(os.path.dirname(__file__), "../"))
+
+import lzo_indexer
+
+
+def parse_args(argv):
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--verbose", "-v", default=False, action="store_true",
+                        help="Enable verbose logging")
+    parser.add_argument("--force", "-f", default=False, action="store_true",
+                        help="Force re-creation of an index even if it exsts")
+    parser.add_argument("lzo_files", type=str, nargs="+",
+                        help="List of LZO files to index")
+
+    # Parse the arguments
+    return parser.parse_args(argv)
+
+
+def main():
+    args = parse_args(sys.argv[1:])
+
+    for lzo_path in args.lzo_files:
+        if not lzo_path.endswith(".lzo"):
+            raise Exception("Invalid LZO file given")
+        index_path = "%s.index" % (lzo_path)
+
+        with open(lzo_path, "r") as lzo_file:
+            if not args.force:
+                if os.path.isfile(index_path):
+                    print "Skipping indexing of %s" % (lzo_path)
+                    continue
+            with open(index_path, "w") as index_file:
+                print "Starting index of %s" % (lzo_path)
+                if args.verbose:
+                    for block in lzo_indexer.get_lzo_blocks(lzo_file):
+                        print "Indexing block at position %d" % (block)
+                        index_file.write(struct.pack(">Q", block))
+                    print "Created index %s" % (index_path)
+                else:
+                    if lzo_indexer.index_lzo_file(lzo_file, index_file):
+                        print "Created index %s" % (index_path)
+
+
+
+if __name__ == "__main__":
+    main()
