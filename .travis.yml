@@ -5,6 +5,6 @@ python:
   - "3"
 # command to install dependencies
 install:
-  - "apt-get install lzop"
+  - "sudo apt-get install lzop"
 # command to run tests
 script: python setup.py test
