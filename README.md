@@ -38,7 +38,7 @@ positional arguments:
 optional arguments:
   -h, --help     show this help message and exit
   --verbose, -v  Enable verbose logging
-  --force, -f    Force re-creation of an index even if it exsts
+  --force, -f    Force re-creation of an index even if it exists
 ```
 
 
