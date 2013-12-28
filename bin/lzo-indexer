@@ -17,7 +17,7 @@ def parse_args(argv):
     parser.add_argument("--verbose", "-v", default=False, action="store_true",
                         help="Enable verbose logging")
     parser.add_argument("--force", "-f", default=False, action="store_true",
-                        help="Force re-creation of an index even if it exsts")
+                        help="Force re-creation of an index even if it exists")
     parser.add_argument("lzo_files", type=str, nargs="+",
                         help="List of LZO files to index")
 
