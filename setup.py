@@ -18,5 +18,6 @@ setup(name="lzo-indexer",
     download_url="https://github.com/duedil-ltd/python-lzo-indexer/archive/release-0.0.1.zip",
     license=read("LICENSE"),
     packages=["lzo_indexer"],
+    scripts=["bin/lzo-indexer"],
     test_suite="tests.test_indexer",
 )
