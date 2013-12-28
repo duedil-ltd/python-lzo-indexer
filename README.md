@@ -1,4 +1,6 @@
 python-lzo-indexer
 ==================
 
-Python library for indexing block offsets within LZO compressed files
+![](https://travis-ci.org/duedil-ltd/python-lzo-indexer.png)
+
+Python library for indexing block offsets within LZO compressed files.
